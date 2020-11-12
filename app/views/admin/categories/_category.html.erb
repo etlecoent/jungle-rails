@@ -3,6 +3,14 @@
     <h4><%= category.name %></h4>
   </td>
   <td>
+    <h4>
+      <% category.products.each do |product|%>
+        <%= product.name %>
+        <br>
+      <% end %>
+    </h4>
+  </td>
+  <td>
     <h4><%= category.products.count %></h4>
   </td>
 </tr>
