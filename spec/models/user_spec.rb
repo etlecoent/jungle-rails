@@ -36,12 +36,12 @@ RSpec.describe User, type: :model do
           expect(@user.errors.full_messages).to include("Email can't be blank")
         end
 
-        xit "validates an email is unique & case sensitive" do 
+        it "validates an email is unique & case sensitive" do 
           @user1 = User.new(first_name: 'Etienne', last_name: 'LC', email: 'test@test.com', password: 'password1', password_confirmation: 'password1')
           @user1.save
           @user2 = User.new(first_name: 'Etienne', last_name: 'LC', email: 'TEST@TEST.com', password: 'password1', password_confirmation: 'password1')
           @user2.save
-          expect(@user2.errors.full_messages).to include("Email can't be blank")
+          expect(@user2.errors.full_messages).to include("Email has already been taken")
         end
       end
 
