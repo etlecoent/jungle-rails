@@ -1,11 +1,17 @@
 <section class="orders-show">
 
   <header class="page-header">
-    <h1>Order #<%= @order.id %></h1>
+    <h1>Order <%= @order.id %></h1>
   </header>
 
   <div class="order-summary jumbotron">
-    <h4>Thank you for your order!</h4>
+    <h4>Thank you for your order!
+      <% if current_user %>
+        <h5>Order placed at <%= current_user.email %> <h5>
+      <% else %>
+        <h5>Order placed as a guest<h5>
+      <% end %>
+    </h4>
   </div>
 
   <div class="panel panel-default items">
