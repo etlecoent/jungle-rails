@@ -72,9 +72,8 @@ RSpec.describe User, type: :model do
       
     it 'returns an instance of the user if successfully authenticated' do
       @user = User.new(first_name: 'Etienne', last_name: "LC", email: 'test@test.com', password: 'password10', password_confirmation: 'password10')
-      @user.save!
+      @user.save
       @auth_user = User.authenticate_with_credentials("test@test.com", "password10")
-      puts @auth_user.inspect
       expect(@auth_user).to be_eql(@user)
     end
 
@@ -84,5 +83,20 @@ RSpec.describe User, type: :model do
       @not_auth_user = User.authenticate_with_credentials("test@test.com", "password20")
       expect(@not_auth_user).to be nil
     end
+
+    it 'returns an instance of the user if successfully authenticated with wrong case' do
+      @user = User.new(first_name: 'Etienne', last_name: "LC", email: 'test@test.com', password: 'password10', password_confirmation: 'password10')
+      @user.save
+      @auth_user = User.authenticate_with_credentials("tEsT@TeSt.CoM", "password10")
+      expect(@auth_user).to be_eql(@user)
+    end
+
+    it 'returns an instance of the user if successfully authenticated with space after email' do
+      @user = User.new(first_name: 'Etienne', last_name: "LC", email: 'test@test.com', password: 'password10', password_confirmation: 'password10')
+      @user.save
+      @auth_user = User.authenticate_with_credentials(" tEsT@TeSt.CoM ", "password10")
+      expect(@auth_user).to be_eql(@user)
+    end
+
   end
 end
