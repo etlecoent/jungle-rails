@@ -37,15 +37,15 @@ RSpec.describe User, type: :model do
         
         it "validates email is present" do
         
-          @user = User.new(first_name: 'Etienne', last_name: 'LC', email: nil, password: 'password1', password_confirmation: 'password1')
+          @user = User.new(first_name: 'Etienne', last_name: 'LC', email: nil, password: 'password10', password_confirmation: 'password10')
           @user.valid?
           expect(@user.errors.full_messages).to include("Email can't be blank")
         end
 
         it "validates an email is unique & case sensitive" do 
-          @user1 = User.new(first_name: 'Etienne', last_name: 'LC', email: 'test@test.com', password: 'password1', password_confirmation: 'password1')
+          @user1 = User.new(first_name: 'Etienne', last_name: 'LC', email: 'test@test.com', password: 'password10', password_confirmation: 'password10')
           @user1.save
-          @user2 = User.new(first_name: 'Etienne', last_name: 'LC', email: 'TEST@TEST.com', password: 'password1', password_confirmation: 'password1')
+          @user2 = User.new(first_name: 'Etienne', last_name: 'LC', email: 'TEST@TEST.com', password: 'password10', password_confirmation: 'password10')
           @user2.save
           expect(@user2.errors.full_messages).to include("Email has already been taken")
         end
@@ -65,6 +65,24 @@ RSpec.describe User, type: :model do
           expect(@user.errors.full_messages).to include("Last name can't be blank")
         end
       end
+    end
+  end
+
+  describe '.authenticate_with_credentials' do
+      
+    it 'returns an instance of the user if successfully authenticated' do
+      @user = User.new(first_name: 'Etienne', last_name: "LC", email: 'test@test.com', password: 'password10', password_confirmation: 'password10')
+      @user.save!
+      @auth_user = User.authenticate_with_credentials("test@test.com", "password10")
+      puts @auth_user.inspect
+      expect(@auth_user).to be_eql(@user)
+    end
+
+    it 'returns nil if not successfully authenticated' do
+      @user = User.new(first_name: 'Etienne', last_name: "LC", email: 'test@test.com', password: 'password10', password_confirmation: 'password10')
+      @user.save
+      @not_auth_user = User.authenticate_with_credentials("test@test.com", "password20")
+      expect(@not_auth_user).to be nil
     end
   end
 end
