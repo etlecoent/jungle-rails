@@ -1,7 +1,5 @@
 class OrdersController < ApplicationController
 
-  before_filter :authorize
-
   def show
     @order = Order.find(params[:id])
   end
@@ -38,6 +36,7 @@ class OrdersController < ApplicationController
   end
 
   def create_order(stripe_charge)
+    puts params[:stripeEmail]
     order = Order.new(
       email: params[:stripeEmail],
       total_cents: cart_subtotal_cents,
