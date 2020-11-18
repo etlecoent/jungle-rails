@@ -1,7 +1,23 @@
 # Jungle
 
-A mini e-commerce application built with Rails 4.2 for purposes of teaching Rails by example.
+Jungle is a mini e-commerce application built with Ruby 2.3.5 & Rails 4.2.
 
+Thanks to this project I learned more about Ruby on Rails, the Model-View-Controller paradigm, Embedded Ruby and testing (TDD & BDD).
+
+## Notes:
+- Known issue: a guest (non-authenticated) user can still place orders. Forbidding this option should be the next step.
+
+### Home page
+!["Home page"](docs/screenshots/home_page.png)
+
+### Admin Categories page
+!["Admin Categories page"](docs/screenshots/admin_categories_page.png)
+
+### Cart page
+!["Cart page"](docs/screenshots/cart_page.png)
+
+### Cart page
+!["Order page"](docs/screenshots/order_page.png)
 
 ## Setup
 
@@ -25,3 +41,17 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 * Rails 4.2 [Rails Guide](http://guides.rubyonrails.org/v4.2/)
 * PostgreSQL 9.x
 * Stripe
+* Jquery-rails
+* Jbuilder 2.0
+* Sdoc 0.4.0
+* Bcrypt 3.1.7
+* Sass-rails 5.0
+* Bootstrap-sass 3.3.6
+* Uglifier 1.3.0
+* Turbolinks
+* Puma
+* Font-awesome-rails
+* Money-rails
+* Carrierwave
+* Rmagick
+* Faker
